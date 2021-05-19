@@ -2,9 +2,6 @@ const readline = require('readline');
 
 const dict = new Map();
 
-dict.set('a_test', new Set(['a value', 'an other value']));
-dict.set('a_nother', new Set(['a value2', 'an other value']));
-
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -77,7 +74,7 @@ const add = (values) => {
       }
     } else {
       dict.set(targetKey, new Set([newEntry]));
-      console.log(`${newEntry} added to newly created key ${targetKey}.`);
+      console.log(`\'${newEntry}\' added to newly created key ${targetKey}.`);
     }
   } else {
     specficUnRecognized('ADD', 'use the syntax ADD [key_name] [your value string]');
@@ -191,11 +188,11 @@ const options = (length) => {
   }
 }
 
-console.log('Welcome to a CLI Dictonary Tool - Type Options for a List of Commands or if you know what you wanna do just get started.')
+console.log('Welcome to a CLI Dictonary Tool - Type OPTIONS for a List of Commands or if you know what you wanna do just get started. (Consecutive, trailing, and ending, spaceing will all be ignored.)')
 rl.prompt();
 
 rl.on('line', (line) => {
-  const res = line.trim().split(' ');
+  const res = line.trim().split(' ').filter((i) => i);
   switch (res[0]) {
     case 'KEYS':
       keys(res.length);
